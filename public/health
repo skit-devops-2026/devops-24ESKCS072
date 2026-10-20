@@ -1,0 +1,7 @@
+{
+  "status": "healthy",
+  "service": "mycorner-fsd",
+  "uptime_seconds": 3600,
+  "version": "1.0.0",
+  "environment": "production"
+}

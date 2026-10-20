@@ -1,0 +1,23 @@
+services:
+  mycorner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/skit-devops-2026/devops-24eskcs072:latest
+    container_name: mycorner-app
+    ports:
+      - "10000:10000"
+    environment:
+      - PORT=10000
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: mycorner-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - mycorner
+    restart: unless-stopped
