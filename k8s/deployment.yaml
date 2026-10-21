@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycorner-deployment
+  labels:
+    app: mycorner
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mycorner
+  template:
+    metadata:
+      labels:
+        app: mycorner
+        tier: frontend
+    spec:
+      containers:
+        - name: mycorner
+          image: ghcr.io/skit-devops-2026/devops-24eskcs072:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 10000
+              name: http
+          env:
+            - name: PORT
+              value: "10000"
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 10000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 10000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 3

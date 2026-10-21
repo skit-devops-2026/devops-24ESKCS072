@@ -56,10 +56,10 @@ docker-compose up -d
 
 ## Live URL
 
-https://devops-24eskcs072.onrender.com
-
-Mirror (GitHub Pages):
 https://skit-devops-2026.github.io/devops-24ESKCS072/
+
+Cloud Web Service Deployment:
+https://devops-24eskcs072.onrender.com
 
 ## Health and Metrics Endpoints
 
